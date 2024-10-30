@@ -1,0 +1,143 @@
+@use 'utils/global-import';
+@use 'commons/reset';
+
+:root {
+  --general-white: #fff;
+  --general-black: #1f1f1f;
+
+  --site-container-max-width: #{$site-container-max-width};
+
+  // Page Padding Variables
+  --page-padding-x: #{$page-padding-x-mobile};
+
+  @include bp('tablet') {
+    --page-padding-x: #{$page-padding-x-tablet};
+  }
+
+  @include bp('desktop') {
+    --page-padding-x: #{$page-padding-x-desktop};
+  }
+}
+
+* {
+  -webkit-tap-highlight-color: rgb(var(--general-black) 0);
+  -webkit-tap-highlight-color: transparent;
+
+  &::selection {
+    color: var(--color-selection, var(--general-white));
+    background: var(--background-selection, var(--general-black));
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+
+  box-sizing: border-box;
+
+  font-size: 10px;
+  font-weight: normal;
+  font-style: normal;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-size: 10px;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+
+  &.progress {
+    cursor: progress;
+
+    * {
+      cursor: progress;
+    }
+  }
+}
+
+html,
+body {
+  overscroll-behavior: none;
+  width: 100%;
+}
+
+body {
+  position: relative;
+
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: var(--general-black);
+
+  background-color: var(--general-white);
+
+  @include bp('tablet') {
+    font-size: 1.6rem;
+  }
+}
+
+// Main Container
+.container {
+  width: calc(100% - var(--page-padding-x) * 2);
+  max-width: none;
+  margin: 0 auto;
+
+  @include bp('tablet') {
+    max-width: none;
+  }
+
+  @include bp('desktop') {
+    max-width: var(--site-container-max-width);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+button:not(.btn-svg) {
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  padding: 1.6rem 2.4rem;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--general-black);
+  color: var(--general-white);
+  border: 0.1rem solid var(--general-black);
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+
+  &:hover {
+    background-color: var(--general-white);
+    color: var(--general-black);
+  }
+}
+
+a {
+  color: var(--general-black);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

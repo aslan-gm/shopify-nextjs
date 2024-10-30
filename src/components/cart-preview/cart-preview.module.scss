@@ -1,0 +1,41 @@
+.wrapper {
+  width: 42rem;
+  padding: 2rem;
+  border: 1px solid var(--general-black);
+  background-color: var(--general-white);
+}
+
+.item {
+  border-bottom: 1px solid var(--general-black);
+  padding: 0 1rem 2rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.image {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  width: 16rem;
+  margin-right: 1rem;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.6rem;
+}
+
+.remove-button {
+  position: absolute;
+  right: 0;
+  top: 1rem;
+  cursor: pointer;
+
+  svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+}

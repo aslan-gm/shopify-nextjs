@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "checkJs": true,
+    "allowJs": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/scss/*": ["src/scss/*"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/components/*": ["src/components/*"],
+      "@/assets/*": ["public/*"]
+    }
+  },
+  "exclude": ["node_modules", ".husky", "public"]
+}

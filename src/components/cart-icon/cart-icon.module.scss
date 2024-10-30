@@ -1,0 +1,22 @@
+.wrapper {
+  position: relative;
+  padding: 1.6rem 0;
+}
+
+.inner {
+  position: absolute;
+  right: 0;
+  top: 100%;
+}
+
+.cart-icon {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+
+  svg {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}

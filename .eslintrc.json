@@ -1,0 +1,60 @@
+{
+  "root": true,
+  "plugins": ["simple-import-sort", "prettier"],
+  "extends": ["next/core-web-vitals", "eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended"],
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-undef": "error",
+    "padding-line-between-statements": [
+      "warn",
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
+      { "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"] },
+      {
+        "blankLine": "always",
+        "prev": ["multiline-const", "multiline-var", "multiline-let"],
+        "next": "*"
+      },
+      { "blankLine": "always", "prev": "directive", "next": "*" },
+      { "blankLine": "any", "prev": "directive", "next": "directive" },
+      { "blankLine": "always", "prev": "*", "next": "function" },
+      { "blankLine": "always", "prev": "function", "next": "*" },
+      { "blankLine": "always", "prev": "*", "next": "if" },
+      { "blankLine": "always", "prev": "if", "next": "*" },
+      { "blankLine": "always", "prev": "*", "next": "for" },
+      { "blankLine": "always", "prev": "for", "next": "*" }
+    ],
+    "prettier/prettier": "warn",
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": 2,
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-newline": [1, { "prevent": true, "allowMultilines": true }],
+    "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
+    "react/no-unknown-property": 0,
+    "simple-import-sort/imports": [
+      "warn",
+      {
+        "groups": [
+          // Default grouping
+          ["^\\u0000"],
+          ["^node:"],
+          ["^@?\\w"],
+          ["^"],
+          ["^\\."],
+          // Img imports
+          ["^.+\\.svg$", "^.+\\.png$", "^.+\\.jpg$", "^.+\\.jpeg$"],
+          // Style imports
+          ["^.+\\.s?css$"]
+        ]
+      }
+    ]
+  },
+  "env": {
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest"
+  }
+}
