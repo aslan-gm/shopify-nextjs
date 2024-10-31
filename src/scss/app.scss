@@ -131,6 +131,12 @@ button:not(.btn-svg) {
     background-color: var(--general-white);
     color: var(--general-black);
   }
+
+  &:disabled {
+    pointer-events: none;
+    cursor: unset;
+    opacity: 0.3;
+  }
 }
 
 a {

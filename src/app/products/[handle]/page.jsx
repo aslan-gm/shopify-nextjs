@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { AddToCartButton } from '@/components'
+import { ProductForm } from '@/components'
 import { getProduct } from '@/utils'
 
 import styles from './page.module.scss'
@@ -17,8 +17,6 @@ export default async function ProductPage({ params }) {
     return <div>Product not found</div>
   }
 
-  const defaultVariant = product.variants.edges[0].node
-
   const formatPrice = (amount, currency) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -33,28 +31,20 @@ export default async function ProductPage({ params }) {
 
         {product.images.edges[0] && (
           <div className={styles['image']}>
-            <Image src={product.images.edges[0].node.url} fill alt={product.images.edges[0].node.altText || product.title} />
+            <Image
+              src={product.images.edges[0].node.url}
+              width={product.images.edges[0].node.width}
+              height={product.images.edges[0].node.height}
+              alt={product.images.edges[0].node.altText || product.title}
+              style={{ objectFit: 'contain' }}
+              sizes="(min-width: 1024px) 25rem, 100vw"
+            />
           </div>
         )}
 
         <p>{formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)}</p>
         <div>{product.description}</div>
-
-        {product.variants.edges.length > 1 && (
-          <div>
-            <h5>Available Options</h5>
-
-            <select>
-              {product.variants.edges.map(({ node }) => (
-                <option key={node.id} value={node.id}>
-                  {node.title} - {formatPrice(node.price.amount, node.price.currencyCode)}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
-        <AddToCartButton className={styles['btn']} variantId={defaultVariant.id} />
+        <ProductForm variants={product.variants.edges} btnClassName={styles['btn']} />
       </div>
     </div>
   )

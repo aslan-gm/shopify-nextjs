@@ -1,6 +1,8 @@
 'use client'
 
 import clsx from 'clsx'
+import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
 
 import { CartPreview } from '@/components'
 import { useCart } from '@/utils'
@@ -9,6 +11,12 @@ import styles from './cart-icon.module.scss'
 
 export default function CartIcon() {
   const { itemCount, isOpen, setIsOpen } = useCart()
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setIsOpen(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
 
   return (
     <>

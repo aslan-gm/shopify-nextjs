@@ -8,9 +8,12 @@
 }
 
 .image {
-  position: relative;
-  aspect-ratio: 3 / 2;
   max-width: 20rem;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 .btn {

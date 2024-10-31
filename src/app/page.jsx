@@ -17,6 +17,8 @@ export default async function HomePage() {
       price: node.priceRange.minVariantPrice.amount,
       currency: node.priceRange.minVariantPrice.currencyCode,
       imageUrl: node.images.edges[0]?.node.url,
+      imageWidth: node.images.edges[0]?.node.width,
+      imageHeight: node.images.edges[0]?.node.height,
       imageAlt: node.images.edges[0]?.node.altText,
     })) || []
 
@@ -30,7 +32,14 @@ export default async function HomePage() {
             <Link href={`/products/${product.handle}`} key={product.id} className={styles['item']}>
               {product.imageUrl && (
                 <div className={styles['image']}>
-                  <Image src={product.imageUrl} alt={product.imageAlt || product.title} fill />
+                  <Image
+                    src={product.imageUrl}
+                    alt={product.imageAlt || product.title}
+                    width={product.imageWidth}
+                    height={product.imageHeight}
+                    style={{ objectFit: 'contain' }}
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                  />
                 </div>
               )}
 
