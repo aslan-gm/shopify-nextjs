@@ -46,6 +46,7 @@ export const useCart = create((set, get) => ({
                           product {
                             title
                           }
+                          quantityAvailable
                         }
                       }
                     }
@@ -179,6 +180,80 @@ export const useCart = create((set, get) => ({
       })
     } catch (error) {
       console.error('Error adding to cart:', error)
+    }
+  },
+
+  updateItem: async (lineId, quantity) => {
+    try {
+      const { cartId } = get()
+
+      const {
+        body: { data },
+      } = await shopifyFetch({
+        query: `
+        mutation UpdateCartLine($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+          cartLinesUpdate(cartId: $cartId, lines: $lines) {
+            cart {
+              id
+              checkoutUrl
+              lines(first: 100) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        title
+                        price {
+                          amount
+                          currencyCode
+                        }
+                        image {
+                          url
+                          altText
+                        }
+                        product {
+                          title
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              estimatedCost {
+                totalAmount {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+          }
+        }
+      `,
+        variables: {
+          cartId,
+          lines: [
+            {
+              id: lineId,
+              quantity,
+            },
+          ],
+        },
+      })
+
+      const cart = data.cartLinesUpdate.cart
+      const items = cart.lines.edges.map(({ node }) => node)
+      const itemCount = items.reduce((total, item) => total + item.quantity, 0)
+
+      set({
+        items,
+        itemCount,
+        checkoutUrl: cart.checkoutUrl,
+        estimatedCost: cart.estimatedCost,
+      })
+    } catch (error) {
+      console.error('Error updating cart:', error)
     }
   },
 

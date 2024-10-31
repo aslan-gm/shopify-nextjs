@@ -21,6 +21,8 @@ export async function getAllProducts() {
                 node {
                   url
                   altText
+                  width
+                  height
                 }
               }
             }
@@ -48,6 +50,8 @@ export async function getProduct(handle) {
             node {
               url
               altText
+              width
+              height
             }
           }
         }
@@ -66,6 +70,7 @@ export async function getProduct(handle) {
             node {
               id
               title
+              quantityAvailable
               price {
                 amount
                 currencyCode
@@ -83,43 +88,3 @@ export async function getProduct(handle) {
     variables: { handle },
   })
 }
-
-export const GET_CART = `
-  query GetCart($cartId: ID!) {
-    cart(id: $cartId) {
-      id
-      checkoutUrl
-      lines(first: 100) {
-        edges {
-          node {
-            id
-            quantity
-            merchandise {
-              ... on ProductVariant {
-                id
-                title
-                price {
-                  amount
-                  currencyCode
-                }
-                image {
-                  url
-                  altText
-                }
-                product {
-                  title
-                }
-              }
-            }
-          }
-        }
-      }
-      estimatedCost {
-        totalAmount {
-          amount
-          currencyCode
-        }
-      }
-    }
-  }
-`
